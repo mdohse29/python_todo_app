@@ -23,17 +23,17 @@ def add_todo():
 # print('----NEW-----')
 sl.title('My Todo App', text_alignment='center')
 sl.subheader('Python Master Course: Todo Web App', text_alignment='center', divider='grey')
-sl.write('TODO LIST:')
-
-for n, td in enumerate(todos):
-    # sl.checkbox(td, key=f"{n}", on_change=complete_todo)
-    # my original way before watching the video ^^^^^^^^
-    cb = sl.checkbox(td, key=f"{n}")
-    if cb:
-        todos.pop(n)
-        todo_func.update_todos(todos)
-        del sl.session_state[f"{n}"]
-        sl.rerun()
+with sl.container(border=True):
+    sl.markdown('#### TODO LIST:')
+    for n, td in enumerate(todos):
+        # sl.checkbox(td, key=f"{n}", on_change=complete_todo)
+        # my original way before watching the video ^^^^^^^^
+        cb = sl.checkbox(td, key=f"{n}")
+        if cb:
+            todos.pop(n)
+            todo_func.update_todos(todos)
+            del sl.session_state[f"{n}"]
+            sl.rerun()
 
 
 sl.text_input(label="Enter a new todo", label_visibility='hidden', key="u_input", placeholder="Enter a new todo", on_change=add_todo)
